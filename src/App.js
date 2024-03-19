@@ -1,25 +1,79 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-restricted-imports */
+import { SmileOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Modal, Space } from 'antd';
+import {  useState } from 'react';
 
-function App() {
+
+const items = [
+  {
+    key: '1',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        {'1st menu item'}
+      </a>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+        {'2nd menu item (disabled)'}
+      </a>
+    ),
+    icon: <SmileOutlined />,
+    disabled: true,
+  },
+  {
+    key: '3',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        {'3rd menu item (disabled)'}
+      </a>
+    ),
+    disabled: true,
+  },
+  {
+    key: '4',
+    danger: true,
+    label: 'a danger item',
+  },
+];
+
+const Test = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      {'hello'}
 
-export default App;
+      <Button type="primary" onClick={showModal}>
+        {'Open Modal'}
+      </Button>
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <p>{'Some contents...'}</p>
+        <p>{'Some contents...'}</p>
+        <p>{'Some contents...'}</p>
+      </Modal>
+
+      <Dropdown menu={{ items }}>
+        <a onClick={(e) => e.preventDefault()}>
+          <Space>{'Hover me'}</Space>
+        </a>
+      </Dropdown>
+    </>
+  );
+};
+
+export default Test;
